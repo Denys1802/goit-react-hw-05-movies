@@ -1,47 +1,63 @@
-import SearchList from 'components/SearchList';
+//import SearchList from 'components/SearchList';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { getSearchMovie } from 'services/fetchApi';
 
 const Movies = () => {
-  const [inputValue, setInputValue] = useState('');
-  const [searchMovie, setSearchMovie] = useState([]);
+  const [input, setInput] = useState('');
+  const [movies, setMovies] = useState([]);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
   const movieTitle = (searchParams.get('query') ?? '').trim();
 
   useEffect(() => {
-    setInputValue(movieTitle);
+    setInput(movieTitle);
     if (movieTitle === '') return;
-    //  getSearchMovie(searchParams.get('query')).then(data =>
-    //    console.log(data.results)
-    //  );
-
-    getSearchMovie(searchParams.get('query')).then(data =>
-      setSearchMovie(data.results)
-    );
-  }, [movieTitle, searchParams]);
+    getSearchMovie(movieTitle).then(data => setMovies(data.data.results));
+  }, [movieTitle]);
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (inputValue.trim() !== '') {
-      setSearchParams({ query: inputValue.trim() });
+    if (input.trim() !== '') {
+      setSearchParams({ query: input.trim() });
     }
-    e.target.reset();
+
+    //e.target.reset();
   }
+
   return (
     <>
       <form onSubmit={handleSubmit}>
         <input
-          value={inputValue}
-          onChange={e => {
-            setInputValue(e.target.value);
-          }}
+          type="text"
+          value={movieTitle}
+          onChange={e => setSearchParams({ query: e.target.value })}
         />
         <button type="submit">searh</button>
       </form>
-      <SearchList searchMovie={searchMovie} />
+
+      {movies > 0 &&
+        movies.map(movie => {
+          return (
+            <ul>
+              <li key={movie.id}>
+                <Link to={`/movie/${movie.id}`}>
+                  <img
+                    src={
+                      movie.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                        : 'https://via.placeholder.com/500x400'
+                    }
+                    alt={movie.title}
+                    height={400}
+                  />
+                  <p>{movie.title}</p>
+                </Link>
+              </li>
+            </ul>
+          );
+        })}
     </>
   );
 };

@@ -52,7 +52,7 @@ export async function getReviewMovie(movieId) {
 
 export async function getSearchMovie(query) {
   const search = await axios.get(
-    `${BASE_URL}/search/movie/${API_KEY}&query=${query}`
+    `${BASE_URL}/search/movie${API_KEY}&query=${query}`
   );
   if (search.status === 200) {
     return search;

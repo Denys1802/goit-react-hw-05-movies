@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getCastMovie } from 'services/fetchApi';
+import { ListCast } from './Cast.styled';
 
 function Cast() {
   const [castData, setCastData] = useState(null);
@@ -14,7 +15,7 @@ function Cast() {
 
   return (
     castData && (
-      <div>
+      <ListCast>
         {castData.map(actor => {
           return (
             <li key={actor.id}>
@@ -22,7 +23,7 @@ function Cast() {
                 src={
                   actor.profile_path
                     ? `https://image.tmdb.org/t/p/original/${actor.profile_path}`
-                    : 'https://via.placeholder.com/150x200'
+                    : 'https://via.placeholder.com/150x225'
                 }
                 alt={actor.name}
                 width={150}
@@ -32,7 +33,7 @@ function Cast() {
             </li>
           );
         })}
-      </div>
+      </ListCast>
     )
   );
 }
