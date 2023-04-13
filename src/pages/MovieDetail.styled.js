@@ -7,10 +7,14 @@ export const WrappPage = styled.div`
   margin: 0 auto;
 `;
 
+export const Img = styled.img`
+  margin-top: 20px;
+`;
+
 export const WrapMovie = styled.div`
   display: flex;
   alight-items: center;
-  justify-content: space-between;
+  ${'' /* justify-content: center; */}
 `;
 
 export const Content = styled.div`
@@ -24,6 +28,9 @@ export const Item = styled(Link)`
   font-size: 18px;
   margin-right: 10px;
   font-weight: bold;
-  color: red;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background-color: red;
   text-transform: uppercase;
 `;

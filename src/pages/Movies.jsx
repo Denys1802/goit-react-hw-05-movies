@@ -1,7 +1,8 @@
 //import SearchList from 'components/SearchList';
 import { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { getSearchMovie } from 'services/fetchApi';
+import { Wrapp, ListMovie, Title } from './Movies.styled';
 
 const Movies = () => {
   const [input, setInput] = useState('');
@@ -10,6 +11,8 @@ const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const movieTitle = (searchParams.get('query') ?? '').trim();
+
+  const location = useLocation();
 
   useEffect(() => {
     setInput(movieTitle);
@@ -23,11 +26,11 @@ const Movies = () => {
       setSearchParams({ query: input.trim() });
     }
 
-    //e.target.reset();
+    e.target.reset();
   }
 
   return (
-    <>
+    <Wrapp>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -37,28 +40,28 @@ const Movies = () => {
         <button type="submit">searh</button>
       </form>
 
-      {movies > 0 &&
-        movies.map(movie => {
-          return (
-            <ul>
-              <li key={movie.id}>
-                <Link to={`/movie/${movie.id}`}>
-                  <img
-                    src={
-                      movie.poster_path
-                        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                        : 'https://via.placeholder.com/500x400'
-                    }
-                    alt={movie.title}
-                    height={400}
-                  />
-                  <p>{movie.title}</p>
-                </Link>
-              </li>
-            </ul>
-          );
-        })}
-    </>
+      {movies.length > 0 && (
+        <ListMovie>
+          {movies.map(movie => (
+            <li key={movie.id}>
+              <Link to={`/movie/${movie.id}`} state={{ from: location }}>
+                <img
+                  src={
+                    movie.poster_path
+                      ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
+                      : 'https://via.placeholder.com/300x450'
+                  }
+                  alt={movie.title}
+                  height={400}
+                />
+              </Link>
+              <Title>{movie.title}</Title>
+            </li>
+          ))}
+          ;
+        </ListMovie>
+      )}
+    </Wrapp>
   );
 };
 
