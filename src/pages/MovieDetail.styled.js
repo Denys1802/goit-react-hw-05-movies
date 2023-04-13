@@ -34,3 +34,15 @@ export const Item = styled(Link)`
   background-color: red;
   text-transform: uppercase;
 `;
+export const Btn = styled.button`
+  text-decoration: none;
+  font-size: 18px;
+  margin-right: 10px;
+  font-weight: bold;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background-color: red;
+  text-transform: uppercase;
+  border: none;
+`;

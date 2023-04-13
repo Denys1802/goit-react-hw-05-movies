@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 function TrendingList({ trendings }) {
   return trendings.map(trend => {
     return (
-      <Link key={trend.id} to={`/movie/${trend.id}`}>
-        <li>{trend.title}</li>
-      </Link>
+      <li key={trend.id}>
+        <Link to={`/movies/${trend.id}`}>
+          <p>{trend.title}</p>
+        </Link>
+      </li>
     );
   });
 }

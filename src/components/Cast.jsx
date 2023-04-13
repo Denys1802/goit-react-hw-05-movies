@@ -14,16 +14,16 @@ function Cast() {
   }, [castData, id]);
 
   return (
-    castData && (
-      <ListCast>
-        {castData.map(actor => {
+    <ListCast>
+      {castData &&
+        castData.map(actor => {
           return (
             <li key={actor.id}>
               <img
                 src={
                   actor.profile_path
                     ? `https://image.tmdb.org/t/p/original/${actor.profile_path}`
-                    : 'https://via.placeholder.com/150x225'
+                    : 'https://via.placeholder.com/150x226'
                 }
                 alt={actor.name}
                 width={150}
@@ -33,8 +33,7 @@ function Cast() {
             </li>
           );
         })}
-      </ListCast>
-    )
+    </ListCast>
   );
 }
 

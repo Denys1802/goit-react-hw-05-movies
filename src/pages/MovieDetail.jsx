@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Outlet, useLocation, useParams } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getMovieById } from 'services/fetchApi';
 import {
   WrapMovie,
@@ -8,11 +8,15 @@ import {
   Item,
   ListItem,
   Img,
+  Btn,
 } from './MovieDetail.styled';
 function MovieDetail() {
   const [detailMovie, setDetailMovie] = useState(null);
   const location = useLocation();
+  const navigate = useNavigate();
+  const backLinkHref = useRef(location?.state?.from ?? '/');
   const { id } = useParams();
+
   useEffect(() => {
     if (detailMovie === null) {
       getMovieById(id).then(data => setDetailMovie(data.data));
@@ -23,9 +27,13 @@ function MovieDetail() {
     <>
       {detailMovie && (
         <WrappPage>
-          <Item to="/movies" state={{ from: location }}>
+          <Btn
+            onClick={() => {
+              navigate(backLinkHref.current);
+            }}
+          >
             Go Back
-          </Item>
+          </Btn>
           <WrapMovie>
             <Img
               src={`https://image.tmdb.org/t/p/original/${detailMovie.poster_path}`}
