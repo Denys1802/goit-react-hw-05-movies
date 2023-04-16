@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchTrending } from 'services/fetchApi';
-import TrendingList from 'components/TrendingList';
+import TrendingList from 'components/TrendingList/TrendingList';
 import { WrapHome } from './Home.styled';
 const Home = () => {
   const [trendings, setTrendings] = useState([]);

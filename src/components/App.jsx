@@ -3,11 +3,11 @@ import { Suspense, lazy } from 'react';
 
 const Movies = lazy(() => import('../pages/Movies'));
 const Home = lazy(() => import('../pages/Home'));
-const Layout = lazy(() => import('./Layout'));
+const Layout = lazy(() => import('./Layout/Layout'));
 const MovieDetail = lazy(() => import('pages/MovieDetail'));
-const Cast = lazy(() => import('./Cast'));
-const Review = lazy(() => import('./Review'));
-
+const Cast = lazy(() => import('./Cast/Cast'));
+const Review = lazy(() => import('./Rewievs/Review'));
+const NotFound = lazy(() => import('pages/NotFound'));
 export const App = () => {
   return (
     <Routes>
@@ -26,6 +26,7 @@ export const App = () => {
           <Route path="reviews" element={<Review />} />
         </Route>
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

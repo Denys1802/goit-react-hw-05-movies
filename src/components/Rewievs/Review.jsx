@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getReviewMovie } from 'services/fetchApi';
+import { Title } from './Rewiev.styled';
 
 function Review() {
   const [reviewData, setreviewData] = useState(null);
@@ -10,21 +11,22 @@ function Review() {
     if (reviewData === null) {
       getReviewMovie(id).then(data => setreviewData(data.data.results));
     }
-    //getReviewMovie(id).then(data => console.log(data.data.results));
   }, [id, reviewData]);
+
   return (
     <>
-      {reviewData &&
-        reviewData.map(review => {
-          return (
-            <ul key={review.id}>
-              <li>
-                <h4>{review.author}</h4>
-                <p>{review.content}</p>
-              </li>
-            </ul>
-          );
-        })}
+      {reviewData ? (
+        reviewData.map(review => (
+          <ul key={review.id}>
+            <li>
+              <h3>{review.author}</h3>
+              <p>{review.content}</p>
+            </li>
+          </ul>
+        ))
+      ) : (
+        <Title>NO Rewievs</Title>
+      )}
     </>
   );
 }

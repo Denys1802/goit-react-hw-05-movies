@@ -14,7 +14,6 @@ export const Img = styled.img`
 export const WrapMovie = styled.div`
   display: flex;
   alight-items: center;
-  ${'' /* justify-content: center; */}
 `;
 
 export const Content = styled.div`
@@ -33,6 +32,9 @@ export const Item = styled(Link)`
   border-radius: 8px;
   background-color: red;
   text-transform: uppercase;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 export const Btn = styled.button`
   text-decoration: none;
@@ -45,4 +47,7 @@ export const Btn = styled.button`
   background-color: red;
   text-transform: uppercase;
   border: none;
+  &:hover {
+    opacity: 0.7;
+  }
 `;

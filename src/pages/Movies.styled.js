@@ -14,4 +14,6 @@ export const ListMovie = styled.ul`
 export const Title = styled.p`
   font-size: 16px;
   font-weight: bold;
+  max-width: 300px;
+  padding: 0 5px;
 `;

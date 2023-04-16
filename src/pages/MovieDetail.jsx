@@ -36,8 +36,12 @@ function MovieDetail() {
           </Btn>
           <WrapMovie>
             <Img
-              src={`https://image.tmdb.org/t/p/original/${detailMovie.poster_path}`}
-              alt={'detailMovie.original_title'}
+              src={
+                detailMovie.poster_path
+                  ? `https://image.tmdb.org/t/p/original/${detailMovie.poster_path}`
+                  : 'https://via.placeholder.com/300x400'
+              }
+              alt={`${detailMovie.original_title}`}
               width={300}
               height={420}
             ></Img>

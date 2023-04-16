@@ -18,7 +18,7 @@ const Movies = () => {
     setInput(movieTitle);
     if (movieTitle === '') return;
     getSearchMovie(movieTitle).then(data => setMovies(data.data.results));
-  }, [movieTitle]);
+  }, [movieTitle, searchParams]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -34,10 +34,10 @@ const Movies = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          value={movieTitle}
-          onChange={e => setSearchParams({ query: e.target.value })}
+          value={input}
+          onChange={e => setInput(e.target.value)}
         />
-        <button type="submit">searh</button>
+        <button type="submit">search</button>
       </form>
 
       {movies.length > 0 && (
